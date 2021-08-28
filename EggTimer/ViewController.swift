@@ -17,9 +17,19 @@ class ViewController: UIViewController {
     ]
     var count = 60
     var timer = Timer()
+
     override func viewDidLoad() {
-        // start a 60s countdown timer
-        timer = Timer.scheduledTimer(timeInterval: <#T##TimeInterval#>, target: <#T##Any#>, selector: startCountdown, userInfo: <#T##Any?#>, repeats: <#T##Bool#>)
+        // start a 60s countdown timer when view loads
+        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true){(Timer) in
+            // make sure to stop timer by invalidating it when 0 seconds remain
+            if self.count > 0 {
+                print("\(self.count) seconds remaining.")
+                self.count -= 1
+            } else {
+                self.timer.invalidate()
+            }
+        }
+         
     }
 
     @IBAction func hardnessSelected(_ sender: UIButton) {
