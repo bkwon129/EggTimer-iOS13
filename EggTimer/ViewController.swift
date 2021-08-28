@@ -11,16 +11,27 @@ import UIKit
 class ViewController: UIViewController {
     
     let eggTimes : [String:Int] = [
-        "Soft": 5,
-        "Medium": 7,
-        "Hard": 12
+        "Soft": 300,
+        "Medium": 420,
+        "Hard": 720
     ]
     var count = 60
     var timer = Timer()
 
     override func viewDidLoad() {
-        // start a 60s countdown timer when view loads
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true){(Timer) in
+        // run code on view load
+    }
+
+    @IBAction func hardnessSelected(_ sender: UIButton) {
+        let hardness = sender.currentTitle!
+        
+        print(eggTimes[hardness]!)
+        startCountdown()
+    
+    }
+    
+    func startCountdown() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){(Timer) in
             // make sure to stop timer by invalidating it when 0 seconds remain
             if self.count > 0 {
                 print("\(self.count) seconds remaining.")
@@ -29,18 +40,6 @@ class ViewController: UIViewController {
                 self.timer.invalidate()
             }
         }
-         
-    }
-
-    @IBAction func hardnessSelected(_ sender: UIButton) {
-        let hardness = sender.currentTitle!
-        
-        print(eggTimes[hardness]!)
-    
-    }
-    
-    func startCountdown() {
-        
     }
     
 }
